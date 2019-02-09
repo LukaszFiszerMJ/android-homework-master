@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="forecast_card_margin">10dp</dimen>
+    <dimen name="small_weather_image_size">60dp</dimen>
+    <dimen name="large_weather_image_size">100dp</dimen>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+    >
+        <TextView
+            android:id="@+id/day_of_week_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Monday"
+            />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/weather_icon_daily"
+            android:layout_width="@dimen/small_weather_image_size"
+            android:layout_height="@dimen/small_weather_image_size"
+            />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/temperature_day_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "temperature" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/temperature_night_daily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text = "temperature" />
+
+</LinearLayout>

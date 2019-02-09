@@ -1,0 +1,68 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.2.30'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    androidSupportVersion = '27.0.2'
+    daggerVersion = '2.2'
+    mvp_version = '1.1.14'
+    okHttpVersion = '3.9.1'
+    retrofitCallAdapterVersion = "1.0.0"
+    retrofitVersion = '2.3.0'
+
+    appcompat = "com.android.support:appcompat-v7:$androidSupportVersion"
+    infullMvp = "com.infullmobile.android:infullmvp-kotlin:$mvp_version"
+    kotlinLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    picasso = 'com.squareup.picasso:picasso:2.5.2'
+    rxAndroid = 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    rxJava2 = 'io.reactivex.rxjava2:rxjava:2.1.1'
+    supportCardView = "com.android.support:cardview-v7:$androidSupportVersion"
+    supportRecyclerView = "com.android.support:recyclerview-v7:$androidSupportVersion"
+
+    // DI
+    dagger = "com.google.dagger:dagger:$daggerVersion"
+    daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // NETWORK
+    gson = 'com.google.code.gson:gson:2.8.0'
+    okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    okHttpLogging = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    retrofitGson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    retrofitRx = "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    retrofitCallAdapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitCallAdapterVersion"
+
+    // TESTS
+    assertJ = 'com.squareup.assertj:assertj-android:1.1.1'
+    infullMvpTest = "com.infullmobile.android:infullmvp-kotlin-basetest:$mvp_version"
+    mockitoKotlin = 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
+
+    OPEN_WEATHER_API_KEY = "\"6ddac4548d2c013b29a4f2899c6b58ab\""
+    OPEN_WEATHER_UNIT = "\"metric\""
+    IMAGE_URL = "\"http://openweathermap.org/img/w/\""
+    BASE_URL = "\"http://api.openweathermap.org/data/2.5/\""
+}

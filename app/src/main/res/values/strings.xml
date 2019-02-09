@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AndroidHomework</string>
+    <string name="weather_placeholder_label_message">Wisplayed here</string>
+
+    <string name="humidity_formatted">"Humidity: %s %%"</string>
+    <string name="pressure_formatted">"Pressure: %s hPa"</string>
+    <string name="temperature_formatted">"%s ℃"</string>
+    <string name="search_city">Search for city</string>
+    <string name="no_connection_error_message"> There is no connection!</string>
+    <string name="no_city_error_message"> No city!</string>
+    <string name="unknown_error_message"> Unknown error!</string>
+    <string name="forecast_title">Forecast</string>
+</resources>

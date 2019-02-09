@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.infullmobile.androidhomework"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "OPEN_WEATHER_API_KEY", OPEN_WEATHER_API_KEY
+        buildConfigField "String", "OPEN_WEATHER_UNIT", OPEN_WEATHER_UNIT
+        buildConfigField "String", "IMAGE_URL", IMAGE_URL
+        buildConfigField "String", "BASE_URL", BASE_URL
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.infullmobile.com/public' }
+}
+
+dependencies {
+    implementation appcompat
+    implementation infullMvp
+    implementation kotlinLib
+    implementation picasso
+    implementation rxAndroid
+    implementation rxJava2
+    implementation supportCardView
+    implementation supportRecyclerView
+
+    // DI
+    implementation dagger
+    kapt daggerCompiler
+
+    // NETWORK
+    implementation gson
+    implementation okHttp
+    implementation okHttpLogging
+    implementation retrofit
+    implementation retrofitGson
+    implementation retrofitRx
+    implementation retrofitCallAdapter
+
+    // TESTS
+    testImplementation assertJ
+    testImplementation infullMvpTest
+    testImplementation mockitoKotlin
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha3'
+    //implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta1'
+}
