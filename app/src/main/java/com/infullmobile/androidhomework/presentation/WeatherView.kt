@@ -77,16 +77,13 @@ open class WeatherView : PresentedActivityView<WeatherPresenter>() {
         }
     }
 
-    open fun showErrorMessage(errorMessage: String ){
-        Toast.makeText(context, errorMessage,
-                Toast.LENGTH_LONG).show()
-    }
-
     open fun showErrorMessage(errorMessage: WeatherError){
 
         val errorTxt = when(errorMessage){
             WeatherError.NO_CONNECTION -> stringFinder(R.string.no_connection_error_message)
             WeatherError.UNKNOWN -> stringFinder(R.string.unknown_error_message)
+            WeatherError.NO_CITY_FOUND -> stringFinder(R.string.no_city_error_message)
+            WeatherError.INVALID_ACCESS ->  stringFinder(R.string.invalid_token_error_message)
         }
 
         Toast.makeText(context, errorTxt,

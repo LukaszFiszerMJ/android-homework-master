@@ -5,12 +5,13 @@ import dagger.Provides
 import com.google.gson.Gson
 import com.infullmobile.androidhomework.BuildConfig
 import com.infullmobile.androidhomework.repository.network.ForecastRemoteService
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import android.content.Context
+import com.infullmobile.androidhomework.repository.network.utils.ErrorUtils
+import com.infullmobile.androidhomework.repository.network.utils.RxErrorHandlingCallAdapterFactory
 import okhttp3.Cache
 
 @Module(includes = [ContextModule::class])
@@ -60,10 +61,11 @@ class NetworkModule {
 
     @Provides
     @WeatherScope
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient, errorUtils: ErrorUtils): Retrofit {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create(errorUtils))
                 .baseUrl(BuildConfig.BASE_URL)
                 .client(okHttpClient)
                 .build()
@@ -74,5 +76,10 @@ class NetworkModule {
     fun provideForecastRemoteService(retrofit: Retrofit) :ForecastRemoteService{
         return retrofit.create(ForecastRemoteService::class.java)
     }
+
+    @Provides
+    @WeatherScope
+    fun provideErrorUtil(gson: Gson) = ErrorUtils(gson)
+
 
 }

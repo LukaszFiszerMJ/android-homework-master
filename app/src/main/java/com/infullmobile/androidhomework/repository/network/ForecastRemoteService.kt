@@ -12,8 +12,8 @@ import retrofit2.http.Query
 interface ForecastRemoteService {
 
     @GET("forecast")
-    fun getForecastForTheCity(@Query("q")city: String): Observable<Response<WeatherForecastApi>>
+    fun getForecastForTheCity(@Query("q")city: String): Observable<WeatherForecastApi>
 
     @GET("weather")
-    fun getWeatherForTheCity(@Query("q")city: String): Observable<Response<Forecast>>
+    fun getWeatherForTheCity(@Query("q")city: String): Observable<Forecast>
 }

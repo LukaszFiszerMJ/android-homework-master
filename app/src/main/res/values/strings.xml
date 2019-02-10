@@ -7,7 +7,8 @@
     <string name="temperature_formatted">"%s ℃"</string>
     <string name="search_city">Search for city</string>
     <string name="no_connection_error_message"> There is no connection!</string>
-    <string name="no_city_error_message"> No city!</string>
+    <string name="no_city_error_message"> No city found!</string>
+    <string name="invalid_token_error_message"> Invalid access token!</string>
     <string name="unknown_error_message"> Unknown error!</string>
     <string name="forecast_title">Forecast</string>
 </resources>

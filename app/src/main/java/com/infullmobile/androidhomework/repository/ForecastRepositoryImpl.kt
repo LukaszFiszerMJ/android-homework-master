@@ -6,7 +6,6 @@ import com.infullmobile.androidhomework.domain.model.WeatherDescriptionItem
 import com.infullmobile.androidhomework.domain.model.WeatherForecastHourly
 import com.infullmobile.androidhomework.repository.converter.ForecastModelConverter
 import com.infullmobile.androidhomework.repository.network.ForecastRemoteService
-import com.infullmobile.androidhomework.repository.network.exception.ServiceException
 import com.infullmobile.androidhomework.repository.network.model.Forecast
 import com.infullmobile.androidhomework.repository.network.model.WeatherErrorResponse
 import io.reactivex.Single
@@ -19,27 +18,31 @@ class ForecastRepositoryImpl (
 ): ForecastRepository {
 
     override fun getWeatherForCity(cityName: String): Single<WeatherDescriptionItem> {
-        return forecastRemoteService.getWeatherForTheCity(cityName).map{response->
-            if(response.isSuccessful){
-                response.body()
-            } else {
-                throw (ServiceException(getWeatherServiceErrorMessage(response)))
-            }
-        }.map{forecast: Forecast ->
+        return forecastRemoteService.getWeatherForTheCity(cityName)
+//                .map{response->
+//            if(response.isSuccessful){
+//                response.body()
+//            } else {
+//                throw (ServiceException(getWeatherServiceErrorMessage(response)))
+//            }
+//        }
+                .map{forecast: Forecast ->
             forecastModelConverter.apiToDomain(forecast)
         }.singleOrError()
     }
 
     override fun getWeatherForecastForCity(cityName: String): Single<WeatherForecastHourly> {
-        return forecastRemoteService.getForecastForTheCity(cityName).map{response->
-
-            if(response.isSuccessful){
-                response.body()
-            } else {
-                throw (ServiceException(getWeatherServiceErrorMessage(response)))
-           }
-
-        }.map{
+        return forecastRemoteService.getForecastForTheCity(cityName)
+//                .map{response->
+//
+//            if(response.isSuccessful){
+//                response.body()
+//            } else {
+//                throw (ServiceException(getWeatherServiceErrorMessage(response)))
+//           }
+//
+//        }
+                .map{
             forecastModelConverter.apiToDomain(it)
         } .singleOrError()
     }

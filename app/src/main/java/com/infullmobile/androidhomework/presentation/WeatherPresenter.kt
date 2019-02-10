@@ -6,13 +6,14 @@ import com.infullmobile.android.infullmvp.Presenter
 import com.infullmobile.androidhomework.addToComposite
 import com.infullmobile.androidhomework.domain.model.WeatherDescriptionItem
 import com.infullmobile.androidhomework.domain.model.WeatherForecastHourly
-import com.infullmobile.androidhomework.repository.network.exception.ServiceException
+import com.infullmobile.androidhomework.repository.network.exception.InvalidAccessTokenException
+import com.infullmobile.androidhomework.repository.network.exception.NoConnectionException
+import com.infullmobile.androidhomework.repository.network.exception.NoCityFoundException
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
-import java.io.IOException
 
 enum class WeatherError {
-     NO_CONNECTION, UNKNOWN
+     NO_CITY_FOUND, INVALID_ACCESS, NO_CONNECTION, UNKNOWN
 }
 
 open class WeatherPresenter(
@@ -78,10 +79,13 @@ open class WeatherPresenter(
 
     private fun onError(throwable: Throwable) {
         when (throwable) {
-            is ServiceException -> {
-                presentedView.showErrorMessage(throwable.message ?: "Custom error")
+            is NoCityFoundException ->{
+                presentedView.showErrorMessage(WeatherError.NO_CITY_FOUND)
             }
-            is IOException -> {
+            is InvalidAccessTokenException->{
+                presentedView.showErrorMessage(WeatherError.INVALID_ACCESS)
+            }
+            is NoConnectionException -> {
                 presentedView.showErrorMessage(WeatherError.NO_CONNECTION)
             }
             else -> presentedView.showErrorMessage(WeatherError.UNKNOWN)
