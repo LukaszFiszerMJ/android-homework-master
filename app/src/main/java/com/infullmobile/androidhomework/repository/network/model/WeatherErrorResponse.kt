@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class WeatherErrorResponse(
         @SerializedName("cod")
-        val code: String,
+        val code: String = "",
         @SerializedName("message")
-        val message: String
+        val message: String = ""
 )

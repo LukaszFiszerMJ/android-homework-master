@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import com.infullmobile.android.infullmvp.PresentedActivityView
@@ -25,6 +26,9 @@ open class WeatherView : PresentedActivityView<WeatherPresenter>() {
     val currentTemperatureView : TextView by bindView(R.id.current_temperature)
     val currentDescription: TextView by bindView(R.id.current_description)
     val forecastTitler : TextView by  bindView(R.id.forecast_titler)
+
+    lateinit var menuItem: MenuItem
+
     val forecastAdapter = ForecastAdapter()
 
     override fun onViewsBound() {
@@ -59,8 +63,8 @@ open class WeatherView : PresentedActivityView<WeatherPresenter>() {
         super.inflateMenu(menu, menuInflater)
         menuInflater.inflate(R.menu.main_menu, menu)
 
-        val menuItem = menu.findItem(R.id.search_button)
-        val searchMenuItem = menuItem?.actionView
+        menuItem = menu.findItem(R.id.search_button)
+        val searchMenuItem = menuItem.actionView
 
         if (searchMenuItem is SearchView) {
             searchMenuItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

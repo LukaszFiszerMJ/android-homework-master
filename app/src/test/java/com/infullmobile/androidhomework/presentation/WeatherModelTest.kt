@@ -26,6 +26,6 @@ class WeatherModelTest {
         val whatWeGot = model.getWeatherForecastForCity(WeatherForecastFactory.TEST_CITY_NAME).blockingGet()
 
         // then
-        assertThat(whatWeGot).isEqualTo(WeatherForecastFactory.createTestWeatherForecast())
+        assertThat(whatWeGot).isEqualToComparingFieldByField(WeatherForecastFactory.createTestWeatherForecast())
     }
 }

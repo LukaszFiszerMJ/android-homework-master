@@ -52,7 +52,7 @@ open class WeatherPresenter(
         disposable.clear()
     }
 
-    fun getForecast(cityName : String){
+    open fun getForecast(cityName : String){
         presentedView.showProgress()
         model.getWeatherForecastForCity(cityName)
                 .zipWith(

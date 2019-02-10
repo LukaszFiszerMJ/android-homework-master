@@ -8,6 +8,9 @@ import com.infullmobile.androidhomework.presentation.WeatherPresenter
 import com.infullmobile.androidhomework.presentation.WeatherPresenter.Companion.CACHED_FORECAST_KEY
 import com.infullmobile.androidhomework.presentation.WeatherPresenter.Companion.CACHED_WEATHER_KEY
 import com.infullmobile.androidhomework.presentation.WeatherView
+import com.infullmobile.androidhomework.repository.network.exception.InvalidAccessTokenException
+import com.infullmobile.androidhomework.repository.network.exception.NoConnectionException
+import com.infullmobile.androidhomework.repository.network.model.WeatherErrorResponse
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
@@ -25,6 +28,7 @@ class WeatherPresenterTest {
     private val testWeatherForecast = WeatherForecastFactory.createTestWeatherForecast()
     private val testWeather = WeatherForecastFactory.createCurrentWeather()
     private val iOErrorMessage = WeatherError.NO_CONNECTION
+    private val invalidTokenErrorMessage = WeatherError.INVALID_ACCESS
 
 
     @Test
@@ -58,14 +62,29 @@ class WeatherPresenterTest {
     fun shouldShowNoConnectionError(){
         //given
         whenever(model.getWeatherForecastForCity(anyString()))
-                .thenReturn(Single.error(IOException()))
+                .thenReturn(Single.error(NoConnectionException()))
         whenever(model.getWeatherForCity(anyString()))
-                .thenReturn(Single.error(IOException()))
+                .thenReturn(Single.error(NoConnectionException()))
 
         //when
         presenter.getForecast("")
 
         // then
         verify(view).showErrorMessage(iOErrorMessage)
+    }
+
+    @Test
+    fun shouldShowInvalidAccessTokenError(){
+        //given
+        whenever(model.getWeatherForecastForCity(anyString()))
+                .thenReturn(Single.error(InvalidAccessTokenException(WeatherErrorResponse())))
+        whenever(model.getWeatherForCity(anyString()))
+                .thenReturn(Single.error(InvalidAccessTokenException(WeatherErrorResponse())))
+
+        //when
+        presenter.getForecast("")
+
+        // then
+        verify(view).showErrorMessage(invalidTokenErrorMessage)
     }
 }

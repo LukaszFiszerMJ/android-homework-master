@@ -24,4 +24,8 @@ object WeatherForecastFactory {
     fun createCurrentWeather() : WeatherDescriptionItem{
         return WeatherDescriptionItem()
     }
+
+    fun createCurrentWeather(description: String) : WeatherDescriptionItem{
+        return WeatherDescriptionItem(description = description)
+    }
 }
