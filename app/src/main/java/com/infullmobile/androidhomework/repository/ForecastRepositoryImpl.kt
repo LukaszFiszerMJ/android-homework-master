@@ -19,13 +19,6 @@ class ForecastRepositoryImpl (
 
     override fun getWeatherForCity(cityName: String): Single<WeatherDescriptionItem> {
         return forecastRemoteService.getWeatherForTheCity(cityName)
-//                .map{response->
-//            if(response.isSuccessful){
-//                response.body()
-//            } else {
-//                throw (ServiceException(getWeatherServiceErrorMessage(response)))
-//            }
-//        }
                 .map{forecast: Forecast ->
             forecastModelConverter.apiToDomain(forecast)
         }.singleOrError()
@@ -33,23 +26,11 @@ class ForecastRepositoryImpl (
 
     override fun getWeatherForecastForCity(cityName: String): Single<WeatherForecastHourly> {
         return forecastRemoteService.getForecastForTheCity(cityName)
-//                .map{response->
-//
-//            if(response.isSuccessful){
-//                response.body()
-//            } else {
-//                throw (ServiceException(getWeatherServiceErrorMessage(response)))
-//           }
-//
-//        }
                 .map{
             forecastModelConverter.apiToDomain(it)
         } .singleOrError()
     }
 
-    private fun <T>getWeatherServiceErrorMessage(response: Response<T>): String{
-        return gson.fromJson(response.errorBody()?.charStream(), WeatherErrorResponse::class.java).message
-    }
 
 }
 
