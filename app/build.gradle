@@ -68,5 +68,4 @@ dependencies {
     testImplementation infullMvpTest
     testImplementation mockitoKotlin
     implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha3'
-    //implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta1'
 }
