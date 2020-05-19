@@ -43,7 +43,7 @@ repositories {
 dependencies {
     implementation appcompat
     implementation infullMvp
-    implementation kotlinLib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation picasso
     implementation rxAndroid
     implementation rxJava2
